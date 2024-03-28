@@ -7,11 +7,11 @@ from ass_caches import *
 system=System()
 
 system.clk_domain = SrcClockDomain()
-system.clk_domain.clock = '1GHz'
+system.clk_domain.clock = '2GHz'
 system.clk_domain.voltage_domain = VoltageDomain()
 
 system.mem_mode = 'timing'
-system.mem_ranges = [AddrRange('1024MB')]
+system.mem_ranges = [AddrRange('2048MB')]
 
 system.cpu = X86TimingSimpleCPU()
 
@@ -59,17 +59,38 @@ system.mem_ctrl.port = system.membus.mem_side_ports
 
 
 #binary = 'tests/test-progs/hello/bin/x86/linux/hello'
+
+#specrand (ok)
 #dir='/home/anonymousa/spec/benchspec/CPU2006/999.specrand/run/run_base_ref_gcc43-64bit.0000'
 #binary=f"{dir}/specrand_base.gcc43-64bit"
 
-dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
-binary=f"{dir}/hmmer_base.gcc43-64bit"
+#hmmer
+# dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
+# binary=f"{dir}/hmmer_base.gcc43-64bit"
+
+#sjeng
+dir='/home/anonymousa/spec/benchspec/CPU2006/458.sjeng/run/run_base_ref_gcc43-64bit.0000'
+binary=f"{dir}/sjeng_base.gcc43-64bit"
+
+
 
 # for gem5 V21 and beyond
 system.workload = SEWorkload.init_compatible(binary)
 
 process = Process()
-process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
+
+#specrand
+# process.cmd = [binary,'1255432124', '234923']
+
+
+
+#hmmer
+# process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
+
+#sjeng
+process.cmd = [binary,f"{dir}/ref.txt"]
+
+
 system.cpu.workload = process
 system.cpu.createThreads()
 
