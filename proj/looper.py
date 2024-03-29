@@ -1,12 +1,14 @@
 import m5
 from m5.objects import *
 from ass_caches import *
+import shutil
 #from m5.objects.ReplacementPolicies import RandomRP,LRURP,FIFORP,MRURP
 
 
 assocs=[2,4,8,512]  #512 for fully assoc
 repl_policies=[RandomRP(),LRURP(),FIFORP(),MRURP()]
-
+M5_FOLDER="/home/anonymousa/gem5_sim/gem5/m5out"
+DESTINATION_BASE="/home/anonymousa/gem5_sim/gem5/my_impl/proj/stats"
 
 system=System()
 
@@ -110,8 +112,13 @@ for assoc in assocs:
 
         m5.instantiate()
 
-        print(f"Beginning simulation for assoc={assoc} and repl_policy={repl_policy}!")
+        print(f"Beginning simulation for assoc={assoc} and repl_policy={repl_policy.type}!")
         exit_event = m5.simulate()
 
         print('Exiting @ tick {} because {}'
             .format(m5.curTick(), exit_event.getCause()))
+        
+        destination=f"{DESTINATION_BASE}/{repl_policy.type}_{assoc}"
+
+        shutil.copytree(M5_FOLDER,destination)
+        print(f"Stats stored for assoc={assoc} and repl_policy={repl_policy.type}")
