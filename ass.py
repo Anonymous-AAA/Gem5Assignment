@@ -61,16 +61,16 @@ system.mem_ctrl.port = system.membus.mem_side_ports
 #binary = 'tests/test-progs/hello/bin/x86/linux/hello'
 
 #specrand (ok)
-#dir='/home/anonymousa/spec/benchspec/CPU2006/999.specrand/run/run_base_ref_gcc43-64bit.0000'
-#binary=f"{dir}/specrand_base.gcc43-64bit"
+dir='/home/anonymousa/spec/benchspec/CPU2006/999.specrand/run/run_base_ref_gcc43-64bit.0000'
+binary=f"{dir}/specrand_base.gcc43-64bit"
 
 #hmmer
 # dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
 # binary=f"{dir}/hmmer_base.gcc43-64bit"
 
 #sjeng
-dir='/home/anonymousa/spec/benchspec/CPU2006/458.sjeng/run/run_base_ref_gcc43-64bit.0000'
-binary=f"{dir}/sjeng_base.gcc43-64bit"
+# dir='/home/anonymousa/spec/benchspec/CPU2006/458.sjeng/run/run_base_ref_gcc43-64bit.0000'
+# binary=f"{dir}/sjeng_base.gcc43-64bit"
 
 
 
@@ -80,7 +80,7 @@ system.workload = SEWorkload.init_compatible(binary)
 process = Process()
 
 #specrand
-# process.cmd = [binary,'1255432124', '234923']
+process.cmd = [binary,'1255432124', '234923']
 
 
 
@@ -88,7 +88,7 @@ process = Process()
 # process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
 
 #sjeng
-process.cmd = [binary,f"{dir}/ref.txt"]
+# process.cmd = [binary,f"{dir}/ref.txt"]
 
 
 system.cpu.workload = process
