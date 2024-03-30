@@ -2,19 +2,19 @@ from m5.objects import Cache,WriteAllocator
 from m5.objects.ReplacementPolicies import RandomRP,LRURP,FIFORP,MRURP
 
 
-class WriteAllocatorBlkSize(WriteAllocator):
-    block_size=128
+# class WriteAllocatorBlkSize(WriteAllocator):
+#     block_size=128
 
 class L1Cache(Cache):
-    assoc = 2
+    #assoc = 2
     tag_latency = 2
     data_latency = 2
     response_latency = 2
     mshrs = 4
     tgts_per_mshr = 20
     size = '64kB'
-    replacement_policy=RandomRP()
-    write_allocator=WriteAllocatorBlkSize()
+    #replacement_policy=RandomRP()
+    # write_allocator=WriteAllocatorBlkSize()
 
     def connectCPU(self, cpu):
         # need to define this in a base class!
