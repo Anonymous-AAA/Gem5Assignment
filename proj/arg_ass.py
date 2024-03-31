@@ -2,7 +2,7 @@ import m5
 from m5.objects import *
 from ass_caches import *
 import argparse
-import shutil
+# import shutil
 
 parser=argparse.ArgumentParser()
 
@@ -99,8 +99,16 @@ binary=f"{dir}/specrand_base.gcc43-64bit"
 # dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
 # binary=f"{dir}/hmmer_base.gcc43-64bit"
 
+#hmmer test
+# dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_test_gcc43-64bit.0000'
+# binary=f"{dir}/hmmer_base.gcc43-64bit"
+
 #sjeng
 # dir='/home/anonymousa/spec/benchspec/CPU2006/458.sjeng/run/run_base_ref_gcc43-64bit.0000'
+# binary=f"{dir}/sjeng_base.gcc43-64bit"
+
+#sjeng test
+# dir='/home/anonymousa/spec/benchspec/CPU2006/458.sjeng/run/run_base_test_gcc43-64bit.0000'
 # binary=f"{dir}/sjeng_base.gcc43-64bit"
 
 
@@ -119,8 +127,14 @@ process.cmd = [binary,'1255432124', '234923']
 #hmmer
 # process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
 
+#hmmer test
+# process.cmd = [binary,'--fixed', '0', '--mean', '325', '--num', '45000', '--sd', '200', '--seed', '0',f"{dir}/bombesin.hmm"]
+
 #sjeng
 # process.cmd = [binary,f"{dir}/ref.txt"]
+
+#sjeng test
+# process.cmd = [binary,f"{dir}/test.txt"]
 
 
 system.cpu.workload = process
@@ -135,6 +149,6 @@ exit_event = m5.simulate()
 print('Exiting @ tick {} because {}'
       .format(m5.curTick(), exit_event.getCause()))
 
-destination=f"{DESTINATION_BASE}/{repl_policy.type}_{assoc}"
+# destination=f"{DESTINATION_BASE}/{repl_policy.type}_{assoc}"
 
-shutil.copytree(M5_FOLDER,destination)
+# shutil.copytree(M5_FOLDER,destination)
