@@ -92,12 +92,13 @@ system.mem_ctrl.port = system.membus.mem_side_ports
 # binary = 'tests/test-progs/hello/bin/x86/linux/hello'
 
 #specrand (ok)
-dir='/home/anonymousa/spec/benchspec/CPU2006/999.specrand/run/run_base_ref_gcc43-64bit.0000'
-binary=f"{dir}/specrand_base.gcc43-64bit"
+# dir='/home/anonymousa/spec/benchspec/CPU2006/999.specrand/run/run_base_ref_gcc43-64bit.0000'
+# binary=f"{dir}/specrand_base.gcc43-64bit"
 
 #hmmer
-# dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
-# binary=f"{dir}/hmmer_base.gcc43-64bit"
+dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_ref_gcc43-64bit.0000'
+binary=f"{dir}/hmmer_base.gcc43-64bit"
+system.cpu.max_insts_all_threads=1000000000  #limiting instructions to 1 billion
 
 #hmmer test
 # dir='/home/anonymousa/spec/benchspec/CPU2006/456.hmmer/run/run_base_test_gcc43-64bit.0000'
@@ -125,7 +126,7 @@ process.cmd = [binary,'1255432124', '234923']
 # process.cmd=[binary]
 
 #hmmer
-# process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
+process.cmd = [binary,f"{dir}/nph3.hmm", f"{dir}/swiss41"]
 
 #hmmer test
 # process.cmd = [binary,'--fixed', '0', '--mean', '325', '--num', '45000', '--sd', '200', '--seed', '0',f"{dir}/bombesin.hmm"]

@@ -1,7 +1,9 @@
 import os
 import matplotlib.pyplot as plt
 
-BASE_DIR="/home/anonymousa/gem5_sim/gem5/my_impl/proj/stats"
+RES_DIR="specrand"
+# RES_DIR="hmmer_1bil"
+BASE_DIR=f"/home/anonymousa/gem5_sim/gem5/my_impl/proj/stats/{RES_DIR}"
 DCACHE_MISS_STAT_NAME="system.cpu.dcache.overallMisses::total"
 ICACHE_MISS_STAT_NAME="system.cpu.icache.overallMisses::total"
 
