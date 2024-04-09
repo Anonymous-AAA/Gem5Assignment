@@ -24,8 +24,8 @@ for entry in os.listdir(BASE_DIR):
     assoc,repl_policy=entry.split('_')
     repl_policy=repl_policy[:-2]
 
-    if repl_policy=="MRU":
-        continue
+    # if repl_policy=="MRU":
+    #     continue
     
     with open(f"{BASE_DIR}/{entry}/stats.txt") as stats_file:
         stats=stats_file.readlines()
