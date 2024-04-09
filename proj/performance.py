@@ -2,8 +2,8 @@ import os
 import matplotlib.pyplot as plt
 
 # RES_DIR="specrand"
-# RES_DIR="hmmer_1bil"
-RES_DIR="sjeng_1bil"
+RES_DIR="hmmer_1bil"
+# RES_DIR="sjeng_1bil"
 BASE_DIR=f"/home/anonymousa/gem5_sim/gem5/my_impl/proj/stats/{RES_DIR}"
 # DCACHE_MISS_STAT_NAME="system.cpu.dcache.overallMisses::total"
 # ICACHE_MISS_STAT_NAME="system.cpu.icache.overallMisses::total"
@@ -24,8 +24,8 @@ for entry in os.listdir(BASE_DIR):
     assoc,repl_policy=entry.split('_')
     repl_policy=repl_policy[:-2]
 
-    # if repl_policy=="MRU":
-    #     continue
+    if repl_policy=="MRU":
+        continue
     
     with open(f"{BASE_DIR}/{entry}/stats.txt") as stats_file:
         stats=stats_file.readlines()
@@ -41,7 +41,7 @@ for entry in os.listdir(BASE_DIR):
 
     # collected_stats[f"{repl_policy}\n{'Fully Assoc' if assoc=='512'  else 'Assoc='+assoc}"]=stat_dict[Parameter]
     categories.append(f"{repl_policy}\n{'Fully Assoc' if assoc=='512'  else 'Assoc='+assoc}")
-    values.append(stat_dict[Parameter])
+    values.append(int(stat_dict[Parameter]))
 
 
 # Extracting keys and values from the dictionary
