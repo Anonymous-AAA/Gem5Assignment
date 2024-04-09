@@ -5,14 +5,20 @@ import matplotlib.pyplot as plt
 # RES_DIR="hmmer_1bil"
 RES_DIR="sjeng_1bil"
 BASE_DIR=f"/home/anonymousa/gem5_sim/gem5/my_impl/proj/stats/{RES_DIR}"
-DCACHE_MISS_STAT_NAME="system.cpu.dcache.overallMisses::total"
-ICACHE_MISS_STAT_NAME="system.cpu.icache.overallMisses::total"
-categories=[]
-values=[]
+# DCACHE_MISS_STAT_NAME="system.cpu.dcache.overallMisses::total"
+# ICACHE_MISS_STAT_NAME="system.cpu.icache.overallMisses::total"
+HOST_SECONDS="hostSeconds"
+IPC="system.cpu.ipc"
+SIM_SECONDS="simSeconds"
+NUM_CYCLES="system.cpu.numCycles"
+
+Parameter=NUM_CYCLES
 
 
 stat_dict={}
-# misses={}
+# collected_stats={}
+categories=[]
+values=[]
 
 for entry in os.listdir(BASE_DIR):
     assoc,repl_policy=entry.split('_')
@@ -31,25 +37,25 @@ for entry in os.listdir(BASE_DIR):
             stat_dict[stat_arr[0]]=stat_arr[1]
 
     
-    total_misses=int(stat_dict[DCACHE_MISS_STAT_NAME])+int(stat_dict[ICACHE_MISS_STAT_NAME])
+    # total_misses=int(stat_dict[DCACHE_MISS_STAT_NAME])+int(stat_dict[ICACHE_MISS_STAT_NAME])
 
-    # misses[f"{repl_policy}\n{'Fully Assoc' if assoc=='512'  else 'Assoc='+assoc}"]=total_misses
+    # collected_stats[f"{repl_policy}\n{'Fully Assoc' if assoc=='512'  else 'Assoc='+assoc}"]=stat_dict[Parameter]
     categories.append(f"{repl_policy}\n{'Fully Assoc' if assoc=='512'  else 'Assoc='+assoc}")
-    values.append(total_misses)
-
+    values.append(stat_dict[Parameter])
 
 
 # Extracting keys and values from the dictionary
-# categories = list(misses.keys())
-# values = list(misses.values())
+# categories = list(collected_stats.keys())
+# values = list(collected_stats.values())
+
 
 # Creating the bar plot
 plt.bar(categories, values,width=0.1)
 
 # Adding title and labels
-plt.title(f"Cache misses v/s replacement policies for all associativities ({RES_DIR})")
+plt.title(f"Performance({Parameter}) v/s replacement policies for all associativities ({RES_DIR})")
 plt.xlabel('Replacement policies for all associativities')
-plt.ylabel('Cache misses')
+plt.ylabel(f"{Parameter}")
 
 # Showing the plot
 plt.show()
